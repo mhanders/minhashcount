@@ -124,14 +124,3 @@ def estimateDistinctElementsParallel(listsOfItems, k):
 	e = np.amin(all_hashes, 0).mean()
 
 	return num_items_from_min_dist(e)
-
-
-
-
-
-# listOfSamples = [get_sample(100) for i in xrange(100)]
-
-# print estimatedDistinctElementsParallel(listOfSamples, 1000)
-
-# print len(reduce(lambda x, y: x | y, map(set, listOfSamples)))
-
