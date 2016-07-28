@@ -89,7 +89,8 @@ def estimateDistinctElements(items, k):
 	items : sequence of elements
 	k:  number of hash functions
 
-	RETURNS 
+	RETURNS:
+	-------
 	estimate : estimate of the number of distinct elements in the sequence
 	"""
 
