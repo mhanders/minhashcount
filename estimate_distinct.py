@@ -1,7 +1,6 @@
 import hashlib
 import random
 import numpy as np
-import ipdb
 from collections import Counter
 
 HASH_BIT_NUM = 128
@@ -125,3 +124,27 @@ def estimateDistinctElementsParallel(listsOfItems, k):
 	e = np.amin(all_hashes, 0).mean()
 
 	return num_items_from_min_dist(e)
+
+
+def calculateEmpiricalAccuracy(items, estimate):
+	"""
+	Calculate estimate - actual. Note returned value can be positive or negative
+
+	Params:
+	------
+	items: arraylike or arraylike of arraylike
+		the sequence or list of sequences under consideration
+	estimate:
+		guess of the cardinality of the set
+
+	Returns:
+	-------
+	difference : float
+		difference between estimated size and actual size of underlying set.
+	"""
+	if len(items) == 0:
+		return estimate
+
+	if type(items[0] == list):
+		return estimate - len(reduce(lambda x, y: x | y, map(set, items)))
+	return estimate - len(set(items))
