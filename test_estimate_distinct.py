@@ -21,7 +21,8 @@ def print_test_report(estimated, actual, test_no):
 	print "TEST #%d" % test_no
 	print "Estimated cardinality: %.2f" % estimated
 	print "Actual cardinality: %d" % actual
-	print "Error %%: %.2f" % (abs(actual - estimated) * 100 / actual)
+	if actual != 0:
+		print "Error %%: %.2f" % (abs(actual - estimated) * 100 / actual)
 	print "\n--------------------\n"
 
 
@@ -44,9 +45,12 @@ def test1():
 	sample = get_sample(1000)
 	print_test_report(estimateDistinctElements(sample, 1000), get_actual_cardinality(sample), 1)
 
+
 def test2():
 	listOfSamples = [get_sample(100) for i in xrange(1000)]
 	print_test_report(estimateDistinctElementsParallel(listOfSamples, 1000), get_actual_cardinality(listOfSamples), 2)
 
-test1()
-test2()
+
+if __name__ == '__main__':
+	test1()
+	test2()

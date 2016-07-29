@@ -92,6 +92,8 @@ def estimateDistinctElements(items, k):
 	-------
 	estimate : estimate of the number of distinct elements in the sequence
 	"""
+	if len(items) == 0:
+		return 0
 
 	min_hashes = min_hashes_by_hash_func(items, k)
 
@@ -117,6 +119,9 @@ def estimateDistinctElementsParallel(listsOfItems, k):
 	estimate : float
 		estimate of the number of distinct elements in total sequence
 	"""
+	if len(listsOfItems) == 0:
+		return 0
+
 	sequence_min_hashes = map(lambda seq: min_hashes_by_hash_func(seq, k), listsOfItems)
 
 	all_hashes = np.vstack(sequence_min_hashes)
@@ -145,6 +150,6 @@ def calculateEmpiricalAccuracy(items, estimate):
 	if len(items) == 0:
 		return estimate
 
-	if type(items[0] == list):
+	if type(items[0]) == list:
 		return estimate - len(reduce(lambda x, y: x | y, map(set, items)))
 	return estimate - len(set(items))
